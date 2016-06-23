@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>platform-war</artifactId>
+    <name>Customized Platform WAR - SDK 3</name>
+    <description>Customized Platform/Repo WAR (alfresco.war) with Platform JAR modules - part of AIO - SDK 3</description>
+    <packaging>war</packaging>
+
+    <parent>
+        <groupId>org.alfresco.tutorial</groupId>
+        <artifactId>aio</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>${alfresco.platform.war.artifactId}</artifactId>
+            <version>${alfresco.platform.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <!-- Bring in the Share Services Module with Share specific Web Scripts and Data List model -->
+        <dependency>
+            <groupId>${alfresco.groupId}</groupId>
+            <artifactId>alfresco-share-services</artifactId>
+            <version>${alfresco.share.version}</version>
+            <type>amp</type>
+        </dependency>
+
+        <!-- Demonstrating the dependency / installation of a Platform/Repo JAR Module -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>platform-sample-jar</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <overlays>
+                        <!-- Current project customizations. This is normally empty, since customizations come from the JARS and AMPs -->
+                        <overlay/>
+                        <!-- The Original Alfresco Platform WAR -->
+                        <overlay>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>${alfresco.platform.war.artifactId}</artifactId>
+                            <type>war</type>
+                            <!-- To allow inclusion of META-INF -->
+                            <excludes/>
+                        </overlay>
+                        <!-- Add / sort your AMPs here,
+                             JARs in the dependency section will be included automatically -->
+                        <overlay>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>alfresco-share-services</artifactId>
+                            <type>amp</type>
+                        </overlay>
+                    </overlays>
+                </configuration>
+                <dependencies>
+                    <!-- Handle any AMP overlays -->
+                    <dependency>
+                        <groupId>org.alfresco.maven.plugin</groupId>
+                        <artifactId>alfresco-maven-plugin</artifactId>
+                        <version>${alfresco.sdk.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
