@@ -11,6 +11,7 @@ Then clone this project and run with `mvn clean install -DskipTests=true alfresc
 # Few things to notice
 
  * No parent pom
+ * No runner project - it's all in the Alfresco Maven Plugin
  * Standard JAR packaging and layout
  * Works seamlessly with Eclipse and IntelliJ IDEA
  * AMP as an assembly
