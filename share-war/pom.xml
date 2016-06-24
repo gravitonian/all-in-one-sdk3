@@ -17,11 +17,19 @@
     </properties>
 
     <dependencies>
+        <!-- The original Share WAR that we want to customize -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>${alfresco.share.war.artifactId}</artifactId>
             <version>${alfresco.share.version}</version>
             <type>war</type>
+        </dependency>
+
+        <!-- Demonstrating the dependency / installation of a Share JAR Module -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>share-sample-jar</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

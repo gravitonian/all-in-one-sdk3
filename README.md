@@ -5,6 +5,7 @@ This is a sample AIO project for the [Alfresco SDK 3.x PoC](https://github.com/A
 Then clone this project and run with `mvn clean install -DskipTests=true alfresco:run` or `./run.sh` and verify that it 
 
  * Runs the embedded Tomcat+H2 DB (and Solr4)
+ * Runs Alfresco Repository
  * Runs Alfresco Share
  * Packages both as JAR and AMP assembly for modules
  

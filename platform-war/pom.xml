@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+        <!-- The original Platform/Repository WAR that we want to customize -->
         <dependency>
             <groupId>${alfresco.groupId}</groupId>
             <artifactId>${alfresco.platform.war.artifactId}</artifactId>
