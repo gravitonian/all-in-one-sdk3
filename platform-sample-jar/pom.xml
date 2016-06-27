@@ -4,7 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>platform-sample-jar</artifactId>
     <name>Platform/Repo Sample Jar Module - part of AIO - SDK 3</name>
-    <description>Sample Platform/Repo JAR Module (to be included in the alfresco.war) - part of AIO - SDK 3</description>
+    <description>Sample Platform/Repo JAR Module (to be included in the alfresco.war) - part of AIO - SDK 3
+    </description>
     <packaging>jar</packaging>
 
     <parent>

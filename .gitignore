@@ -6,6 +6,7 @@
 **.log
 **.log*
 target/
+overlays/
 **.settings
 alf_data_dev
 

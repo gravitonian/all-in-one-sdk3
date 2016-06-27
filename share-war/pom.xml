@@ -90,6 +90,53 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+
+            <!-- Hot reloading with JRebel
+            <plugin>
+                <groupId>org.zeroturnaround</groupId>
+                <artifactId>jrebel-maven-plugin</artifactId>
+                <version>${jrebel.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-rebel-xml</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <war>
+                        <path>/home/martin/src/sdk3/aio/share-war/target/share-war-1.0-SNAPSHOT</path>
+                    </war>
+
+                    <web>
+                        <resources>
+                            <resource>
+                                <target>/</target>
+                                <directory>/home/martin/src/sdk3/aio/share-sample-jar/src/main/resources/META-INF</directory>
+                            </resource>
+                        </resources>
+                    </web>
+-->
+                    <!--
+                    <link target="/">
+                        <dir name="/home/martin/src/sdk3/aio/share-sample-jar/src/main/resources/META-INF">
+                        </dir>
+                    </link>
+                    <link target="/">
+                        <dir name="/home/martin/src/sdk3/aio/share-war/META-INF">
+                        </dir>
+                    </link>
+-->
+                    <!--
+                      addResourcesDirToRebelXml - default is false
+                      Required if the resource directories are to be added to rebel.xml
+                    -->
+   <!--                 <addResourcesDirToRebelXml>true</addResourcesDirToRebelXml>
+                </configuration>
+            </plugin>-->
         </plugins>
     </build>
 
