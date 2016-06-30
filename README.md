@@ -4,14 +4,16 @@ This is a sample AIO project for the [Alfresco SDK 3.x PoC](https://github.com/A
 
 Then clone this project and run with `mvn clean install -DskipTests=true alfresco:run` or `./run.sh` and verify that it 
 
- * Runs the embedded Tomcat+H2 DB (and Solr4)
- * Runs Alfresco Repository
+ * Runs the embedded Tomcat + H2 DB 
+ * Runs Alfresco Platform (Repository)
+ * Runs Alfresco Solr4
  * Runs Alfresco Share
  * Packages both as JAR and AMP assembly for modules
  
 # Few things to notice
 
  * No parent pom
+ * No WAR projects, all handled by the Alfresco Maven Plugin configuration
  * No runner project - it's all in the Alfresco Maven Plugin
  * Standard JAR packaging and layout
  * Works seamlessly with Eclipse and IntelliJ IDEA
