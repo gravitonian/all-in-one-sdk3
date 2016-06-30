@@ -35,14 +35,6 @@
         <alfresco.share.version>5.1.f</alfresco.share.version>
         <alfresco.surf.version>6.3</alfresco.surf.version>
 
-        <!-- AIO project's custom webapp artifacts and versions, these are the webapps that will be deployed
-             and run by the tomcat maven plugin when executing $ mvn .... alfresco:run -->
-        <runner.alfresco.groupId>${project.groupId}</runner.alfresco.groupId>
-        <runner.alfresco.platform.war.artifactId>platform-war</runner.alfresco.platform.war.artifactId>
-        <runner.alfresco.platform.version>${project.version}</runner.alfresco.platform.version>
-        <runner.alfresco.share.war.artifactId>share-war</runner.alfresco.share.war.artifactId>
-        <runner.alfresco.share.version>${project.version}</runner.alfresco.share.version>
-
         <!-- Alfresco Repo Database configuration.
            By default it uses a flat file H2 database to be able to run embedded.
            The H2 database implementation is brought in via the tomcat7-maven-plugin as a dependency.
@@ -59,7 +51,7 @@
         </alfresco.db.url>
         <alfresco.db.datasource.class>org.h2.jdbcx.JdbcDataSource</alfresco.db.datasource.class>
 
-        <!-- JRebel Version (Hot reloading) -->
+        <!-- JRebel Hot reloading of classpath stuff and web resource stuff -->
         <jrebel.version>1.1.6</jrebel.version>
 
         <!-- Environment to use, Alfresco Maven Plugin will copy alfresco-global.properties from this directory -->
@@ -85,14 +77,14 @@
                  They are defined in alfresco-platform-distribution... -->
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>share</artifactId>
+                <artifactId>${alfresco.share.war.artifactId}</artifactId>
                 <version>${alfresco.share.version}</version>
                 <type>war</type>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>${alfresco.groupId}</groupId>
-                <artifactId>share</artifactId>
+                <artifactId>${alfresco.share.war.artifactId}</artifactId>
                 <version>${alfresco.share.version}</version>
                 <classifier>classes</classifier>
                 <scope>provided</scope>
@@ -155,6 +147,55 @@
         </pluginManagement>
 
         <plugins>
+            <!--
+                The Alfresco Maven Plugin contains all the logic to run the extension
+                in an embedded Tomcat with the H2 database.
+            -->
+            <plugin>
+                <groupId>org.alfresco.maven.plugin</groupId>
+                <artifactId>alfresco-maven-plugin</artifactId>
+                <version>${alfresco.sdk.version}</version>
+                <configuration>
+                    <!-- We need the flat file H2 database to run the Repo -->
+                    <enableH2>true</enableH2>
+                    <!-- We always need the Platform/Repo webapp - alfresco.war -->
+                    <enablePlatform>true</enablePlatform>
+                    <!-- Enable Solr webapp so we can use search -->
+                    <enableSolr>true</enableSolr>
+                    <!-- We need Share webapp, so we got a UI for working with the Repo -->
+                    <enableShare>true</enableShare>
+
+                    <!--
+                        JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR
+                        (i.e. alfresco.war)
+                    -->
+                    <runnerAlfrescoPlatformModules>
+                        <moduleDependency>
+                            <groupId>${alfresco.groupId}</groupId>
+                            <artifactId>alfresco-share-services</artifactId>
+                            <version>${alfresco.share.version}</version>
+                            <type>amp</type>
+                        </moduleDependency>
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>platform-sample-jar</artifactId>
+                            <version>${project.version}</version>
+                        </moduleDependency>
+                    </runnerAlfrescoPlatformModules>
+
+                    <!--
+                        JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
+                    -->
+                    <runnerAlfrescoShareModules>
+                        <moduleDependency>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>share-sample-jar</artifactId>
+                            <version>${project.version}</version>
+                        </moduleDependency>
+                    </runnerAlfrescoShareModules>
+                </configuration>
+            </plugin>
+
             <!-- Filter the test resource files in the AIO parent project, and do property substitutions.
                  We need this here to get it done before the Alfresco Maven Plugin run is executed. -->
             <plugin>
@@ -180,26 +221,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-            <!--
-                The Alfresco Maven Plugin contains all the logic to run the extension
-                in an embedded Tomcat with the H2 database.
-            -->
-            <plugin>
-                <groupId>org.alfresco.maven.plugin</groupId>
-                <artifactId>alfresco-maven-plugin</artifactId>
-                <version>${alfresco.sdk.version}</version>
-                <configuration>
-                    <!-- We need the flat file H2 database to run the Repo -->
-                    <enableH2>true</enableH2>
-                    <!-- We always need the Platform/Repo webapp - alfresco.war -->
-                    <enableRepository>true</enableRepository>
-                    <!-- Enable Solr webapp so we can use search -->
-                    <enableSolr>true</enableSolr>
-                    <!-- We need Share webapp, so we got a UI for working with the Repo -->
-                    <enableShare>true</enableShare>
-                </configuration>
             </plugin>
 
             <!-- Hot reloading with JRebel -->
@@ -274,8 +295,6 @@
     <modules>
         <module>platform-sample-jar</module>
         <module>share-sample-jar</module>
-        <module>platform-war</module>
-        <module>share-war</module>
     </modules>
 
 </project>

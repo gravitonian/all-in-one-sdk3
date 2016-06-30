@@ -31,7 +31,6 @@ import java.util.Map;
  * @since 2.1.0
  */
 public class HelloWorldWebScript extends DeclarativeWebScript {
-
     protected Map<String, Object> executeImpl(
             WebScriptRequest req, Status status, Cache cache) {
         Map<String, Object> model = new HashMap<String, Object>();

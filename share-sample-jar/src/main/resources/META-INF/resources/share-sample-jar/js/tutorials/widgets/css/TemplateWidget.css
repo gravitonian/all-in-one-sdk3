@@ -1,6 +1,6 @@
 .my-template-widget {
-    border: 2px #000000 solid;
+    border: 1px #000000 solid;
     padding: 1em;
     width: 100px;
-    background-color: greenyellow;
+    background-color: darkseagreen;
 }
