@@ -27,7 +27,9 @@
         <solr.model.dir>${solr.home}/alfrescoModels</solr.model.dir>
         <solr.content.dir>${solr.home}/index</solr.content.dir>
 
-        <!-- Alfresco standard webapp artifacts and versions -->
+        <!-- Alfresco webapp artifacts and versions, these are the original Alfresco webapps that will be
+             customized and then deployed and run by the tomcat maven plugin when
+             executing for example $ mvn clean install alfresco:run -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
         <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
         <alfresco.platform.version>5.1.g</alfresco.platform.version>
@@ -169,7 +171,7 @@
                         JARs and AMPs that should be overlayed/applied to the Platform/Repository WAR
                         (i.e. alfresco.war)
                     -->
-                    <runnerAlfrescoPlatformModules>
+                    <platformModules>
                         <moduleDependency>
                             <groupId>${alfresco.groupId}</groupId>
                             <artifactId>alfresco-share-services</artifactId>
@@ -181,18 +183,18 @@
                             <artifactId>platform-sample-jar</artifactId>
                             <version>${project.version}</version>
                         </moduleDependency>
-                    </runnerAlfrescoPlatformModules>
+                    </platformModules>
 
                     <!--
                         JARs and AMPs that should be overlayed/applied to the Share WAR (i.e. share.war)
                     -->
-                    <runnerAlfrescoShareModules>
+                    <shareModules>
                         <moduleDependency>
                             <groupId>${project.groupId}</groupId>
                             <artifactId>share-sample-jar</artifactId>
                             <version>${project.version}</version>
                         </moduleDependency>
-                    </runnerAlfrescoShareModules>
+                    </shareModules>
                 </configuration>
             </plugin>
 
