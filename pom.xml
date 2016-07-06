@@ -31,10 +31,11 @@
              customized and then deployed and run by the tomcat maven plugin when
              executing for example $ mvn clean install alfresco:run -->
         <alfresco.groupId>org.alfresco</alfresco.groupId>
-        <alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>
-        <alfresco.platform.version>5.1.g</alfresco.platform.version>
+        <!--<alfresco.platform.war.artifactId>alfresco-platform</alfresco.platform.war.artifactId>-->
+        <alfresco.platform.war.artifactId>alfresco</alfresco.platform.war.artifactId>
+        <alfresco.platform.version>5.0.d</alfresco.platform.version>
         <alfresco.share.war.artifactId>share</alfresco.share.war.artifactId>
-        <alfresco.share.version>5.1.f</alfresco.share.version>
+        <alfresco.share.version>5.0.d</alfresco.share.version>
         <alfresco.surf.version>6.3</alfresco.surf.version>
 
         <!-- Alfresco Repo Database configuration.
